@@ -1,0 +1,168 @@
+{
+    "Elements": [
+        {
+            "ID": 0,
+            "Name": "Empty",
+            "Collision": "00000100",
+            "Char": 0,
+            "Color": 0
+        },
+        {
+            "ID": 1,
+            "Name": "Floor",
+            "Collision": "00000100",
+            "Char": 176,
+            "Color": "DKGREEN"
+        },
+        {
+            "ID": 2,
+            "Name": "Solid",
+            "Collision": "00000011",
+            "Char": 219,
+            "Color": "RED"
+        },
+        {
+            "ID": 3,
+            "Name": "Normal",
+            "Collision": "00000011",
+            "Char": 178,
+            "Color": "YELLOW"
+        },
+        {
+            "ID": 4,
+            "Name": "Breakable",
+            "Collision": "00000011",
+            "Char": 177,
+            "Color": "BLUE",
+            "Script": "BREAKABLE"
+        },
+        {
+            "ID": 5,
+            "Name": "Boulder",
+            "Collision": "00000011",
+            "Char": 254,
+            "Color": "GRAY",
+            "PushFlags": "PUSHABLE_ALL"
+        },
+        {
+            "ID": 6,
+            "Name": "SliderNS",
+            "Collision": "00000011",
+            "Char": 18,
+            "Color": "PURPLE",
+            "PushFlags": "PUSHABLE_NS"
+        },
+        {
+            "ID": 7,
+            "Name": "SliderEW",
+            "Collision": "00000011",
+            "Char": 29,
+            "Color": "PURPLE",
+            "PushFlags": "PUSHABLE_EW"
+        },
+        {
+            "ID": 8,
+            "Name": "Fake",
+            "Collision": "00000000",
+            "Char": 178,
+            "Color": "Yellow"
+        },
+        {
+            "ID": 9,
+            "Name": "Invisible",
+            "Collision": "00000011",
+            "Char": 176,
+            "Color": "RED",
+            "Script": "INVISIBLE"
+        },
+        {
+            "ID": 10,
+            "Name": "Water",
+            "Collision": "00000010",
+            "Char": 178,
+            "Color": "BLUE/GRAY"
+        },
+        {
+            "ID": 11,
+            "Name": "Forest",
+            "Collision": "00000011",
+            "Char": 176,
+            "Color": "BLACK/DKGREEN",
+            "Script": "FOREST"
+        },
+        {
+            "ID": 12,
+            "Name": "Ammo",
+            "Char": 132,
+            "Color": "CYAN",
+            "Collision": "00000011",
+            "Script": "AMMO",
+            "PushFlags": "PUSHABLE_ALL"
+        },
+        {
+            "ID": 13,
+            "Name": "Gem",
+            "Char": 4,
+            "Color": "CYAN",
+            "Collision": "00000011",
+            "Script": "GEM",
+            "PushFlags": "PUSHABLE_ALL"
+        },
+        {
+            "ID": 14,
+            "Name": "Key",
+            "Char": 12,
+            "Color": "PURPLE",
+            "Collision": "00000011",
+            "Script": "KEY",
+            "PushFlags": "PUSHABLE_ALL"
+        },
+        {
+            "ID": 15,
+            "Name": "Door",
+            "Char": 9,
+            "Color": "PURPLE/WHITE",
+            "Collision": "00000011",
+            "Script": "DOOR"
+        },
+        {
+            "ID": 16,
+            "Name": "Water_N",
+            "Char": 30,
+            "Color": "BLUE/DKBLUE",
+            "Collision": "00000100",
+            "Script": "WATER_N"
+        },
+        {
+            "ID": 17,
+            "Name": "Water_S",
+            "Char": 31,
+            "Color": "BLUE/DKBLUE",
+            "Collision": "00000100",
+            "Script": "WATER_S"
+        },
+        {
+            "ID": 18,
+            "Name": "Water_E",
+            "Char": 16,
+            "Color": "BLUE/DKBLUE",
+            "Collision": "00000100",
+            "Script": "WATER_E"
+        },
+        {
+            "ID": 19,
+            "Name": "Water_W",
+            "Char": 17,
+            "Color": "BLUE/DKBLUE",
+            "Collision": "00000100",
+            "Script": "WATER_W"
+        },
+        {
+            "ID": 20,
+            "Name": "RICOCHET",
+            "Char": 42,
+            "Color": "GREEN",
+            "Collision": "00000011"
+        }
+    ]
+}

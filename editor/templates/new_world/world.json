@@ -1,0 +1,17 @@
+{
+    "Name": "test_world",
+    "TitleBoard": "TITLE",
+    "StartBoard": "BOARD1",
+    "FPS": 10,
+    "InputCycle": 1,
+    "Counters": [
+        {
+            "Name": "HEALTH",
+            "Value": 100
+        },
+        {
+            "Name": "GEMS",
+            "Value": 0
+        }
+    ]
+}

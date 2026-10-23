@@ -1,0 +1,100 @@
+{
+    "Bindings": [
+        {
+            "Key": "UP",
+            "Action": "INPUT_UP"
+        },
+        {
+            "Key": "DOWN",
+            "Action": "INPUT_DOWN"
+        },
+        {
+            "Key": "LEFT",
+            "Action": "INPUT_LEFT"
+        },
+        {
+            "Key": "RIGHT",
+            "Action": "INPUT_RIGHT"
+        },
+        {
+            "Key": "ENTER",
+            "Action": "INPUT_ACCEPT"
+        },
+        {
+            "Key": "ESCAPE",
+            "Action": "INPUT_CANCEL"
+        },
+        {
+            "Key": "MOUSE_WHEEL_UP",
+            "Action": "INPUT_SCROLL_UP"
+        },
+        {
+            "Key": "MOUSE_WHEEL_DOWN",
+            "Action": "INPUT_SCROLL_DOWN"
+        },
+        {
+            "Key": "MOUSE_LEFT",
+            "Action": "INPUT_MOUSE_ACCEPT"
+        },
+        {
+            "Key": "W",
+            "Action": "HK_WORLD_INFO"
+        },
+        {
+            "Key": "B",
+            "Action": "HK_BOARDS"
+        },
+        {
+            "Key": "I",
+            "Action": "HK_BOARD_INFO"
+        },
+        {
+            "Key": "V",
+            "Action": "HK_VIEW"
+        },
+        {
+            "Key": "O",
+            "Action": "HK_OBJECT"
+        },
+        {
+            "Key": "P",
+            "Action": "HK_PREFAB"
+        },
+        {
+            "Key": "E",
+            "Action": "HK_ELEMENT"
+        },
+        {
+            "Key": "D",
+            "Action": "HK_DRAW"
+        },
+        {
+            "Key": "T",
+            "Action": "HK_TEXT"
+        },
+        {
+            "Key": "F",
+            "Action": "HK_FILL"
+        },
+        {
+            "Key": "R",
+            "Action": "HK_REMOVE_OBJ"
+        },
+        {
+            "Key": "S",
+            "Action": "HK_SAVE"
+        },
+        {
+            "Key": "Q",
+            "Action": "HK_QUIT"
+        },
+        {
+            "Key": "L",
+            "Action": "HK_LOAD"
+        },
+        {
+            "Key": "F5",
+            "Action": "HK_DEBUG"
+        }
+    ]
+}

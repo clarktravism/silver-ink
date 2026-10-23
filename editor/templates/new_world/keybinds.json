@@ -1,0 +1,76 @@
+{
+    "Bindings": [
+        {
+            "Action": "INPUT_UP",
+            "Key": "UP"
+        },
+        {
+            "Action": "INPUT_DOWN",
+            "Key": "DOWN"
+        },
+        {
+            "Action": "INPUT_LEFT",
+            "Key": "LEFT"
+        },
+        {
+            "Action": "INPUT_RIGHT",
+            "Key": "RIGHT"
+        },
+        {
+            "Action": "INPUT_ACCEPT",
+            "Key": "ENTER"
+        },
+        {
+            "Action": "INPUT_CANCEL",
+            "Key": "ESCAPE"
+        },
+        {
+            "Action": "INPUT_SCROLL_UP",
+            "Key": "MOUSE_WHEEL_UP"
+        },
+        {
+            "Action": "INPUT_SCROLL_DOWN",
+            "Key": "MOUSE_WHEEL_DOWN"
+        },
+        {
+            "Action": "INPUT_MOUSE_ACCEPT",
+            "Key": "MOUSE_LEFT"
+        },
+        {
+            "Action": "HK_PLAY",
+            "Key": "P"
+        },
+        {
+            "Action": "HK_LOAD",
+            "Key": "L"
+        },
+        {
+            "Action": "HK_QUIT",
+            "Key": "Q"
+        },
+        {
+            "Action": "HK_SAVE",
+            "Key": "S"
+        },
+        {
+            "Action": "INPUT_SHOOT_UP",
+            "Key": "SHIFT+UP"
+        },
+        {
+            "Action": "INPUT_SHOOT_DOWN",
+            "Key": "SHIFT+DOWN"
+        },
+        {
+            "Action": "INPUT_SHOOT_LEFT",
+            "Key": "SHIFT+LEFT"
+        },
+        {
+            "Action": "INPUT_SHOOT_RIGHT",
+            "Key": "SHIFT+RIGHT"
+        },
+        {
+            "Action": "INPUT_SHOOT",
+            "Key": "SPACE"
+        }
+    ]
+}

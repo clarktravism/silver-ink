@@ -1,0 +1,202 @@
+{
+    "Views": [
+        {
+            "ID": 1,
+            "Camera": {
+                "Position": "0,0",
+                "Size": "27,25",
+                "Offset": "-13,-12"
+            },
+            "Panels": [
+                {
+                    "Position": "27,0",
+                    "Size": "13,25",
+                    "Color": "DKBLUE",
+                    "Char": 219
+                }
+            ],
+            "Icons": [
+                {
+                    "Position": "28,8",
+                    "Char": 2,
+                    "Color": "WHITE/DKBLUE"
+                },
+                {
+                    "Position": "28,10",
+                    "Char": 132,
+                    "Color": "CYAN/DKBLUE"
+                },
+                {
+                    "Position": "28,12",
+                    "Char": 4,
+                    "Color": "CYAN/DKBLUE"
+                }
+            ],
+            "Labels": [
+                {
+                    "Text": "Life:",
+                    "Color": "YELLOW/DKBLUE",
+                    "Position": "31,8"
+                },
+                {
+                    "Text": "Ammo:",
+                    "Color": "YELLOW/DKBLUE",
+                    "Position": "31,10"
+                },
+                {
+                    "Text": "Gems:",
+                    "Color": "YELLOW/DKBLUE",
+                    "Position": "31,12"
+                },
+                {
+                    "Text": "Keys:",
+                    "Color": "YELLOW/DKBLUE",
+                    "Position": "28,14"
+                },
+                {
+                    "Text" : " S ",
+                    "Position" : "28,21",
+                    "Color" : "BLACK/GRAY"
+                },
+                {
+                    "Text": "Save",
+                    "Color": "YELLOW/DKBLUE",
+                    "Position": "32,21"
+                },
+                {
+                    "Text" : " L ",
+                    "Position" : "28,22",
+                    "Color" : "BLACK/DKCYAN"
+                },
+                {
+                    "Text": "Load",
+                    "Color": "YELLOW/DKBLUE",
+                    "Position": "32,22"
+                },
+                {
+                    "Text" : " Q ",
+                    "Position" : "28,23",
+                    "Color" : "BLACK/GRAY"
+                },
+                {
+                    "Text": "Quit",
+                    "Color": "YELLOW/DKBLUE",
+                    "Position": "32,23"
+                }
+
+            ],
+            "Counters": [
+                {
+                    "Counter": "HEALTH",
+                    "Color": "WHITE/DKBLUE",
+                    "Position": "36,8",
+                    "Length": 3
+                },
+                {
+                    "Counter": "AMMO",
+                    "Color": "WHITE/DKBLUE",
+                    "Position": "36,10",
+                    "Length": 3
+                },
+                {
+                    "Counter": "GEMS",
+                    "Color": "WHITE/DKBLUE",
+                    "Position": "36,12",
+                    "Length": 3
+                }
+            ],
+            "Flags": [
+                {
+                    "Counter": "BLUEKEY",
+                    "Position": "33,14",
+                    "Color": "BLUE/DKBLUE",
+                    "Char": 12
+                },
+                {
+                    "Counter": "GREENKEY",
+                    "Position": "34,14",
+                    "Color": "GREEN/DKBLUE",
+                    "Char": 12
+                },
+                {
+                    "Counter": "CYANKEY",
+                    "Position": "35,14",
+                    "Color": "CYAN/DKBLUE",
+                    "Char": 12
+                },
+                {
+                    "Counter": "REDKEY",
+                    "Position": "36,14",
+                    "Color": "RED/DKBLUE",
+                    "Char": 12
+                },
+                {
+                    "Counter": "PURPLEKEY",
+                    "Position": "37,14",
+                    "Color": "PURPLE/DKBLUE",
+                    "Char": 12
+                },
+                {
+                    "Counter": "YELLOWKEY",
+                    "Position": "38,14",
+                    "Color": "YELLOW/DKBLUE",
+                    "Char": 12
+                },
+                {
+                    "Counter": "WHITEKEY",
+                    "Position": "39,14",
+                    "Color": "WHITE/DKBLUE",
+                    "Char": 12
+                }
+            ]
+        },
+        {
+            "ID": 2,
+            "Camera": {
+                "Position": "0,0",
+                "Size": "40,24",
+                "Offset": "-20,-12"
+            },
+            "Panels": [
+                {
+                    "Position": "0,24",
+                    "Size": "40,1",
+                    "Color": "DKBLUE",
+                    "Char": 219
+                }
+            ],
+            "Labels" : [
+                {
+                    "Text" : " P ",
+                    "Position" : "4,24",
+                    "Color" : "BLACK/GRAY"
+                },
+                {
+                    "Text" : "Play",
+                    "Position" : "8,24",
+                    "Color" : "WHITE/DKBLUE"
+                },
+                {
+                    "Text" : " L ",
+                    "Position" : "16,24",
+                    "Color" : "BLACK/GRAY"
+                },
+                {
+                    "Text" : "Load",
+                    "Position" : "20,24",
+                    "Color" : "WHITE/DKBLUE"
+                },
+                {
+                    "Text" : " Q ",
+                    "Position" : "28,24",
+                    "Color" : "BLACK/GRAY"
+                },
+                {
+                    "Text" : "Quit",
+                    "Position" : "32,24",
+                    "Color" : "WHITE/DKBLUE"
+                }
+            ]
+        }
+    ]
+}

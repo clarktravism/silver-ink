@@ -1,0 +1,182 @@
+{
+    "Prefabs": [
+        {
+            "Name": "PLAYER",
+            "Cycle": 1,
+            "Char": 2,
+            "Color": "WHITE/DKBLUE",
+            "Script": "PLAYER",
+            "Collision": "00000011",
+            "DrawFlags": "PRIORITY,SHOW_BG",
+            "PushFlags": "CAN_PUSH,PUSHABLE_ALL",
+            "Player": true,
+            "Follow": true
+        },
+        {
+            "Name": "BULLET",
+            "Cycle": 1,
+            "Char": 249,
+            "Color": "WHITE",
+            "Script": "BULLET",
+            "Collision": "00000001"
+        },
+        {
+            "Name": "EBULLET",
+            "Group" : "ENEMY",
+            "Cycle": 1,
+            "Char": 249,
+            "Color": "WHITE",
+            "Script": "BULLET",
+            "Collision": "00000001"
+        },
+        {
+            "Name": "LION",
+            "Group" : "ENEMY",
+            "Cycle": 2,
+            "Char": 234,
+            "Color": "RED",
+            "Script": "LION",
+            "Collision": "00000011",
+            "PushFlags": "PUSHABLE_ALL",
+            "Counters": [
+                {
+                    "Name": "INTELLIGENCE",
+                    "Value": 3
+                }
+            ]
+        },
+        {
+            "Name": "TIGER",
+            "Group" : "ENEMY",
+            "Cycle": 2,
+            "Char": 227,
+            "Color": "YELLOW",
+            "Script": "TIGER",
+            "Collision": "00000011",
+            "PushFlags": "PUSHABLE_ALL",
+            "Counters": [
+                {
+                    "Name": "INTELLIGENCE",
+                    "Value": 3
+                },
+                {
+                    "Name": "FIRERATE",
+                    "Value": 2
+                },
+                {
+                    "Name": "THROWSTAR",
+                    "Value": 0
+                }
+            ]
+        },
+        {
+            "Name": "RUFFIAN",
+            "Group" : "ENEMY",
+            "Cycle": 1,
+            "Char": 5,
+            "Color": "PURPLE",
+            "Script": "RUFFIAN",
+            "Collision": "00000011",
+            "PushFlags": "PUSHABLE_ALL",
+            "Counters": [
+                {
+                    "Name": "INTELLIGENCE",
+                    "Value": 3
+                },
+                {
+                    "Name": "RESTTIME",
+                    "Value": 5
+                }
+            ]
+        },
+        {
+            "Name": "BEAR",
+            "Group" : "ENEMY",
+            "Cycle": 3,
+            "Char": 153,
+            "Color": "BROWN",
+            "Script": "BEAR",
+            "Collision": "00000011",
+            "PushFlags": "PUSHABLE_ALL",
+            "Counters": [
+                {
+                    "Name": "SENSITIVITY",
+                    "Value": 3
+                }
+            ]
+        },
+        {
+            "Name": "SHARK",
+            "Cycle": 4,
+            "Char": 94,
+            "Color": "GRAY",
+            "Collision": "00000101",
+            "Script": "SHARK",
+            "Counters": [
+                {
+                    "Name": "INTELLIGENCE",
+                    "Value": 3
+                }
+            ]
+        },
+        {
+            "Name": "SLIME",
+            "Cycle": 3,
+            "Char": 42,
+            "Color": "GREEN",
+            "Script": "SLIME",
+            "Collision": "00000011"
+        },
+        {
+            "Name": "STAR",
+            "Cycle": 2,
+            "Char": 47,
+            "Color": "BLUE",
+            "Script": "STAR",
+            "Collision": "00000001",
+            "PushFlags": "CAN_PUSH",
+            "Counters": [
+                {
+                    "Name": "DURATION",
+                    "Value": 60
+                }
+            ]
+        },
+        {
+            "Name": "PUSHER_N",
+            "Cycle": 4,
+            "Char": 30,
+            "Color": "BLUE",
+            "Script": "PUSHER_N",
+            "Collision": "00000011",
+            "PushFlags": "CAN_PUSH"
+        },
+        {
+            "Name": "PUSHER_S",
+            "Cycle": 4,
+            "Char": 31,
+            "Color": "RED",
+            "Script": "PUSHER_S",
+            "Collision": "00000011",
+            "PushFlags": "CAN_PUSH"
+        },
+        {
+            "Name": "PUSHER_E",
+            "Cycle": 4,
+            "Char": 16,
+            "Color": "GREEN",
+            "Script": "PUSHER_E",
+            "Collision": "00000011",
+            "PushFlags": "CAN_PUSH"
+        },
+        {
+            "Name": "PUSHER_W",
+            "Cycle": 4,
+            "Char": 17,
+            "Color": "CYAN",
+            "Script": "PUSHER_W",
+            "Collision": "00000011",
+            "PushFlags": "CAN_PUSH"
+        }
+    ]
+}
