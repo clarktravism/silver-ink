@@ -1,8 +1,9 @@
 package engine
 
 import (
-	"github.com/jupiterrider/purego-sdl3/sdl"
 	"silver-ink/data"
+
+	sdl "github.com/Zyko0/go-sdl3/sdl"
 )
 
 var actionBuffer data.Name = data.DefaultName
@@ -28,8 +29,8 @@ func ClearActionBuffer() {
 	actionRepeat = 0
 }
 
-func actionKeyCodeDown(key sdl.KeyboardEvent) {
-	if key.Key == sdl.KeycodeLShift {
+func actionKeyCodeDown(key *sdl.KeyboardEvent) {
+	if key.Key == sdl.K_LSHIFT {
 		return
 	}
 
@@ -40,11 +41,10 @@ func actionKeyCodeDown(key sdl.KeyboardEvent) {
 	}
 }
 
-func actionKeyCodeUp(key sdl.KeyboardEvent) {
-	if key.Key == sdl.KeycodeLShift {
+func actionKeyCodeUp(key *sdl.KeyboardEvent) {
+	if key.Key == sdl.K_LSHIFT {
 		return
 	}
-
 
 	if keycodeDown == key.Key {
 		keycodeDown = 0
@@ -52,7 +52,7 @@ func actionKeyCodeUp(key sdl.KeyboardEvent) {
 	}
 }
 
-func actionMouseWheel(wheel sdl.MouseWheelEvent) {
+func actionMouseWheel(wheel *sdl.MouseWheelEvent) {
 	if actionBuffer.Empty() {
 		code := MouseCode(0)
 		if wheel.IntegerY < 0 {
@@ -66,20 +66,20 @@ func actionMouseWheel(wheel sdl.MouseWheelEvent) {
 	}
 }
 
-func actionMouseButton(button sdl.MouseButtonEvent) {
+func actionMouseButton(button *sdl.MouseButtonEvent) {
 	if button.Down && actionBuffer.Empty() {
 		switch button.Button {
-		case uint8(sdl.ButtonLeft):
+		case uint8(sdl.BUTTON_LEFT):
 			actionBuffer = getMouseAction(MouseCodeLeft)
-		case uint8(sdl.ButtonRight):
+		case uint8(sdl.BUTTON_RIGHT):
 			actionBuffer = getMouseAction(MouseCodeRight)
-		case uint8(sdl.ButtonMiddle):
+		case uint8(sdl.BUTTON_MIDDLE):
 			actionBuffer = getMouseAction(MouseCodeMiddle)
 		}
 	}
 }
 
-const mod_filter = sdl.KeymodAlt | sdl.KeymodCtrl | sdl.KeymodShift
+const mod_filter = sdl.KMOD_ALT | sdl.KMOD_CTRL | sdl.KMOD_SHIFT
 
 func currentKeyboardAction() data.Name {
 	if keycodeDown == 0 {
@@ -105,13 +105,13 @@ func getMouseAction(code MouseCode) data.Name {
 }
 
 func IsShift(mod sdl.Keymod) bool {
-	return mod&sdl.KeymodShift != 0
+	return mod&sdl.KMOD_SHIFT != 0
 }
 
 func IsCtrl(mod sdl.Keymod) bool {
-	return mod&sdl.KeymodCtrl != 0
+	return mod&sdl.KMOD_CTRL != 0
 }
 
 func IsAlt(mod sdl.Keymod) bool {
-	return mod&sdl.KeymodAlt != 0
+	return mod&sdl.KMOD_ALT != 0
 }

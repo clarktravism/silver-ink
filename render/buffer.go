@@ -2,29 +2,30 @@ package render
 
 import (
 	"silver-ink/data"
-	"github.com/jupiterrider/purego-sdl3/sdl"
+
+	"github.com/Zyko0/go-sdl3/sdl"
 )
 
 const buffer_batch_size = 32
 
 type Buffer struct {
-	r    *sdl.Renderer
+	r       *sdl.Renderer
 	offsetX float32
 	offsetY float32
-	rects [buffer_batch_size]sdl.FRect
-	width int
-	height int
-	size int
-	Cells []data.Cell
+	rects   [buffer_batch_size]sdl.FRect
+	width   int
+	height  int
+	size    int
+	Cells   []data.Cell
 }
 
 func NewBuffer(width int, height int, renderer *sdl.Renderer) *Buffer {
 	return &Buffer{
-		width: width,
+		width:  width,
 		height: height,
-		size: width * height,
-		Cells: make([]data.Cell, width*height),
-		r: renderer,
+		size:   width * height,
+		Cells:  make([]data.Cell, width*height),
+		r:      renderer,
 	}
 }
 
@@ -45,7 +46,7 @@ func (buf *Buffer) Render() {
 func (buf *Buffer) renderBG() {
 	rects := buf.rects[:0]
 	for c := data.Color(1); c < 16; c++ {
-		sdl.SetRenderDrawColor(buf.r, palette[c].R, palette[c].G, palette[c].B, sdl.AlphaOpaque)
+		buf.r.SetDrawColor(palette[c].R, palette[c].G, palette[c].B, sdl.ALPHA_OPAQUE)
 		//iterate over cells within the view
 		y := float32(0)
 		x := float32(0)
@@ -58,7 +59,7 @@ func (buf *Buffer) renderBG() {
 					})
 					//clear/flush rects if full
 					if len(rects) == buffer_batch_size {
-						sdl.RenderFillRects(buf.r, rects[:])
+						buf.r.RenderFillRects(rects[:])
 						rects = buf.rects[:0]
 					}
 				}
@@ -69,21 +70,21 @@ func (buf *Buffer) renderBG() {
 			y += 8
 		}
 		//finish flush before moving to next color
-		sdl.RenderFillRects(buf.r, rects)
+		buf.r.RenderFillRects(rects)
 		rects = buf.rects[:0]
 	}
 }
 
 func (buf *Buffer) renderFG() {
 	for c := range data.Color(16) {
-		sdl.SetTextureColorMod(charset, palette[c].R, palette[c].G, palette[c].B)
+		charset.SetColorMod(palette[c].R, palette[c].G, palette[c].B)
 		//iterate over cells within the view
-		rect := sdl.FRect{X: buf.offsetX, Y: buf.offsetY, W:8, H:8}
+		rect := sdl.FRect{X: buf.offsetX, Y: buf.offsetY, W: 8, H: 8}
 		i := 0
 		for iy := 0; iy < buf.height; iy++ {
 			for ix := 0; ix < buf.width; ix++ {
 				if buf.Cells[i].Char != 0 && buf.Cells[i].Color.FG() == c {
-					sdl.RenderTexture(buf.r, charset, &charLookUp[buf.Cells[i].Char], &rect)
+					buf.r.RenderTexture(charset, &charLookUp[buf.Cells[i].Char], &rect)
 				}
 				rect.X += 8
 				i++
@@ -103,12 +104,16 @@ func (buf *Buffer) GetCells() []data.Cell {
 }
 
 func (buf *Buffer) SetCell(index int, cell data.Cell) {
-	if index < 0 || index >= len(buf.Cells) { return }
+	if index < 0 || index >= len(buf.Cells) {
+		return
+	}
 	buf.Cells[index] = cell
 }
 
 func (buf *Buffer) GetCell(index int) data.Cell {
-	if index < 0 || index >= len(buf.Cells) { return data.Cell{} }
+	if index < 0 || index >= len(buf.Cells) {
+		return data.Cell{}
+	}
 	return buf.Cells[index]
 }
 

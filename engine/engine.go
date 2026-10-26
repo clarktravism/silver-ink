@@ -1,13 +1,14 @@
 package engine
 
 import (
-	"log"
 	"silver-ink/render"
 	"time"
 
-	"github.com/jupiterrider/purego-sdl3/sdl"
+	"github.com/Zyko0/go-sdl3/sdl"
+	"github.com/Zyko0/go-sdl3/bin/binsdl"
 )
 
+var _library library
 var _window *sdl.Window
 var _renderer *sdl.Renderer
 var _buffer *render.Buffer
@@ -18,50 +19,55 @@ var BufferWidth int
 var BufferHeight int
 var BufferLength int
 
-func Setup(title string, width int, height int, fps int) {
+func Setup(title string, width int, height int, fps int) error {
+	_library = binsdl.Load()
+
 	BufferWidth = width
 	BufferHeight = height
-	BufferLength = width*height
-	base_resolution_width := int32(width * 8)
-	base_resolution_height := int32(height * 8)
+	BufferLength = width * height
+	base_resolution_width := width * 8
+	base_resolution_height := height * 8
 
 	// sdl setup
-	if !sdl.SetHint(sdl.HintRenderVSync, "1") {
-		log.Println(sdl.GetError())
-		panic(sdl.GetError())
+	if err := sdl.SetHint(sdl.HINT_RENDER_VSYNC, "1"); err != nil {
+		return err
+	}
+	if err := sdl.Init(sdl.INIT_VIDEO); err != nil {
+		return err
 	}
 
-	if !sdl.Init(sdl.InitVideo) {
-		log.Println(sdl.GetError())
-		panic(sdl.GetError())
-	}
-	if !sdl.CreateWindowAndRenderer(title, base_resolution_width*2, base_resolution_height*2, sdl.WindowResizable, &_window, &_renderer) {
-		log.Println(sdl.GetError())
-		panic(sdl.GetError())
+	var err error
+	_window, _renderer, err = sdl.CreateWindowAndRenderer(title, base_resolution_width*2, base_resolution_height*2, sdl.WINDOW_RESIZABLE)
+	if err != nil {
+		return err
 	}
 
-	sdl.SetRenderLogicalPresentation(_renderer, base_resolution_width, base_resolution_height, sdl.LogicalPresentationIntegerScale)
+	_renderer.SetLogicalPresentation(int32(base_resolution_width), int32(base_resolution_height), sdl.LOGICAL_PRESENTATION_INTEGER_SCALE)
 
 	// buffer setup
 	_buffer = render.NewBuffer(width, height, _renderer)
-
 	_tpf = time.Duration(time.Second / time.Duration(fps))
+
+	return nil
 }
 
 func Close() {
-	sdl.Quit()
-	sdl.DestroyWindow(_window)
-	sdl.DestroyRenderer(_renderer)
+	CloseAudio()
 	render.DestroyCharsets()
+	_window.Destroy()
+	_renderer.Destroy()
+	sdl.Quit()
+	if _library != nil { 
+		_library.Unload()
+	}
 }
 
 func Run() {
-	for {
+	sdl.RunLoop(func() error {
 		frameStart := time.Now()
-
 		poll()
 		if _quit {
-			return
+			return sdl.EndLoop
 		}
 
 		stackProcess()
@@ -73,18 +79,26 @@ func Run() {
 			sdl.DelayNS(uint64(_tpf - frameDuration))
 		}
 		tick++
-	}
+		return nil
+	})
 }
 
 func Title(text string) {
-	sdl.SetWindowTitle(_window, text)
+	_window.SetTitle(text)
 }
 
 func FPS(fps int) {
-	if fps <= 0 { fps = 10 }
+	if fps <= 0 {
+		fps = 10
+	}
 	_tpf = time.Duration(time.Second / time.Duration(fps))
 }
 
 func CycleTick(cycle uint8) bool {
-	return cycle != 0 && tick % cycle == 0
+	return cycle != 0 && tick%cycle == 0
+}
+
+
+type library interface {
+	Unload()
 }

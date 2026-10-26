@@ -1,40 +1,42 @@
 package engine
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
-	"strings"
-	"encoding/json"
 	"silver-ink/data"
-	"github.com/jupiterrider/purego-sdl3/sdl"
+	"strings"
+
+	"github.com/Zyko0/go-sdl3/sdl"
 )
 
 var kBinds []KeyBind
 var mBinds []MouseBind
 
 type KeyBind struct {
-	Keycode sdl.Keycode
+	Keycode  sdl.Keycode
 	Modifier sdl.Keymod
-	Action data.Name
+	Action   data.Name
 }
 
 type MouseBind struct {
 	MouseCode MouseCode
-	Modifier sdl.Keymod
-	Action data.Name
+	Modifier  sdl.Keymod
+	Action    data.Name
 }
 
 type MouseCode byte
+
 const (
-	MouseCodeLeft = 1
-	MouseCodeRight = 2
-	MouseCodeMiddle = 3
-	MouseCodeWheelUp = 4
+	MouseCodeLeft      = 1
+	MouseCodeRight     = 2
+	MouseCodeMiddle    = 3
+	MouseCodeWheelUp   = 4
 	MouseCodeWheelDown = 5
 )
 
 type binding struct {
-	Key string `json:"Key"`
+	Key    string    `json:"Key"`
 	Action data.Name `json:"Action"`
 }
 
@@ -47,8 +49,8 @@ func LoadKeyBinds(path string) error {
 		return err
 	}
 
-	bindings := struct{
-		Bindings []binding `json:"Bindings"` 
+	bindings := struct {
+		Bindings []binding `json:"Bindings"`
 	}{}
 	if err := json.Unmarshal(b, &bindings); err != nil {
 		return fmt.Errorf("error while reading keybinds: %v", err)
@@ -89,11 +91,11 @@ func parseKeyMod(key string) (string, sdl.Keymod, error) {
 		key = keyStr
 		switch modStr {
 		case "shift":
-			keymod = sdl.KeymodShift
+			keymod = sdl.KMOD_SHIFT
 		case "ctrl":
-			keymod = sdl.KeymodCtrl
+			keymod = sdl.KMOD_CTRL
 		case "alt":
-			keymod = sdl.KeymodAlt
+			keymod = sdl.KMOD_ALT
 		default:
 			return "", 0, fmt.Errorf("invalid modifer: %v", modStr)
 		}
@@ -121,8 +123,8 @@ func parseMouseBind(key string, mod sdl.Keymod, action data.Name) error {
 
 	mBinds = append(mBinds, MouseBind{
 		MouseCode: mouseCode,
-		Modifier: mod,
-		Action: action,
+		Modifier:  mod,
+		Action:    action,
 	})
 	return nil
 }
@@ -133,9 +135,9 @@ func parseKeyBind(key string, mod sdl.Keymod, action data.Name) error {
 		return err
 	}
 	kBinds = append(kBinds, KeyBind{
-		Keycode: keyCode,
+		Keycode:  keyCode,
 		Modifier: mod,
-		Action: action,
+		Action:   action,
 	})
 	return nil
 }
@@ -144,45 +146,45 @@ func parseKeyCode(key string) (sdl.Keycode, error) {
 	// parse scanscode
 	switch key {
 	case "space":
-		return sdl.KeycodeSpace, nil
+		return sdl.K_SPACE, nil
 	case "enter":
-		return sdl.KeycodeReturn, nil
+		return sdl.K_RETURN, nil
 	case "return":
-		return sdl.KeycodeReturn, nil
+		return sdl.K_RETURN, nil
 	case "escape":
-		return sdl.KeycodeEscape, nil
+		return sdl.K_ESCAPE, nil
 	case "up":
-		return sdl.KeycodeUp, nil
+		return sdl.K_UP, nil
 	case "down":
-		return sdl.KeycodeDown, nil
+		return sdl.K_DOWN, nil
 	case "left":
-		return sdl.KeycodeLeft, nil
+		return sdl.K_LEFT, nil
 	case "right":
-		return sdl.KeycodeRight, nil
+		return sdl.K_RIGHT, nil
 	case "f1":
-		return sdl.KeycodeF1, nil
+		return sdl.K_F1, nil
 	case "f2":
-		return sdl.KeycodeF2, nil
+		return sdl.K_F2, nil
 	case "f3":
-		return sdl.KeycodeF3, nil
+		return sdl.K_F3, nil
 	case "f4":
-		return sdl.KeycodeF4, nil
+		return sdl.K_F4, nil
 	case "f5":
-		return sdl.KeycodeF5, nil
+		return sdl.K_F5, nil
 	case "f6":
-		return sdl.KeycodeF6, nil
+		return sdl.K_F6, nil
 	case "f7":
-		return sdl.KeycodeF7, nil
+		return sdl.K_F7, nil
 	case "f8":
-		return sdl.KeycodeF8, nil
+		return sdl.K_F8, nil
 	case "f9":
-		return sdl.KeycodeF9, nil
+		return sdl.K_F9, nil
 	case "f10":
-		return sdl.KeycodeF10, nil
+		return sdl.K_F10, nil
 	case "f11":
-		return sdl.KeycodeF11, nil
+		return sdl.K_F11, nil
 	case "f12":
-		return sdl.KeycodeF12, nil
+		return sdl.K_F12, nil
 	}
 
 	if len(key) != 1 {
@@ -192,7 +194,7 @@ func parseKeyCode(key string) (sdl.Keycode, error) {
 	k := sdl.Keycode(key[0])
 
 	// most ascii characters
-	if (k >= sdl.KeycodeExclaim && k <= sdl.KeycodeAt) || (k >= sdl.KeycodeLeftBracket && k <= sdl.KeycodeTilde) {
+	if (k >= sdl.K_EXCLAIM && k <= sdl.K_AT) || (k >= sdl.K_LEFTBRACKET && k <= sdl.K_TILDE) {
 		return k, nil
 	}
 

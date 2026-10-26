@@ -6,9 +6,8 @@ import (
 	"image"
 	_ "image/png"
 	"os"
-	"unsafe"
 
-	"github.com/jupiterrider/purego-sdl3/sdl"
+	"github.com/Zyko0/go-sdl3/sdl"
 )
 
 var charset *sdl.Texture
@@ -19,7 +18,7 @@ func LoadCharset(r *sdl.Renderer, filename string) error {
 		return err
 	}
 	if charset != nil {
-		sdl.DestroyTexture(charset)
+		charset.Destroy()
 	}
 	charset = tex
 	return nil
@@ -27,7 +26,7 @@ func LoadCharset(r *sdl.Renderer, filename string) error {
 
 func DestroyCharsets() {
 	if charset != nil {
-		sdl.DestroyTexture(charset)
+		charset.Destroy()
 	}
 }
 
@@ -51,9 +50,10 @@ func readTexturePNG(r *sdl.Renderer, filename string) (*sdl.Texture, error) {
 	}
 
 	// create surface
-	surface := sdl.CreateSurface(128, 128, sdl.PixelFormatRGBA32)
-	defer sdl.DestroySurface(surface)
-	sPixels := unsafe.Slice((*uint32)(surface.Pixels), 128*128)
+	surface, _ := sdl.CreateSurface(128, 128, sdl.PIXELFORMAT_RGBA32)
+	defer surface.Destroy()
+	pixels := surface.Pixels()
+	//sPixels := unsafe.Slice((*uint32)(pixels), 128*128)
 
 	// set pixels
 	i := 0
@@ -61,17 +61,22 @@ func readTexturePNG(r *sdl.Renderer, filename string) (*sdl.Texture, error) {
 		for ix := range 128 {
 			r, g, b, _ := img.At(ix, iy).RGBA()
 			if r == 0 && g == 0 && b == 0 {
-				sPixels[i] = offPixel
+				pixels[i] = 0
+				pixels[i+1] = 0
+				pixels[i+2] = 0
+				pixels[i+3] = 0
 			} else {
-				sPixels[i] = onPixel
+				pixels[i] = 255
+				pixels[i+1] = 255
+				pixels[i+2] = 255
+				pixels[i+3] = 255
 			}
-			i++
+			i+=4
 		}
 	}
 
-	texture := sdl.CreateTextureFromSurface(r, surface)
-	sdl.SetTextureScaleMode(texture, sdl.ScaleModePixelArt)
-
+	texture, _ := r.CreateTextureFromSurface(surface)
+	texture.SetScaleMode(sdl.SCALEMODE_PIXELART)
 	return texture, nil
 }
 

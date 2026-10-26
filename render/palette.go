@@ -7,7 +7,7 @@ import (
 	_ "image/png"
 	"os"
 
-	"github.com/jupiterrider/purego-sdl3/sdl"
+	"github.com/Zyko0/go-sdl3/sdl"
 )
 
 type Palette [16]Color
@@ -35,10 +35,9 @@ func LoadPalette(filename string) error {
 
 func ClearBackground(r *sdl.Renderer) {
 	col := palette[0]
-	sdl.SetRenderDrawColor(r, col.R, col.G, col.B, sdl.AlphaOpaque)
-	sdl.RenderClear(r)
+	r.SetDrawColor(col.R, col.G, col.B, sdl.ALPHA_OPAQUE)
+	r.Clear()
 }
-
 
 func SetColor(value Color, color int) {
 	palette[color] = value
@@ -60,15 +59,15 @@ func readPalettePNG(filename string) (Palette, error) {
 		return Palette{}, err
 	}
 	size := img.Bounds().Size()
-	if size.X * size.Y != 16 {
+	if size.X*size.Y != 16 {
 		return Palette{}, errors.New("incorrect pal image size")
 	}
 
 	// create the palette
 	p := Palette{}
 	i := 0
-	for iy := range(size.Y) {
-		for ix := range(size.X) {
+	for iy := range size.Y {
+		for ix := range size.X {
 			r, g, b, _ := img.At(ix, iy).RGBA()
 			p[i] = Color{R: uint8(r), G: uint8(g), B: uint8(b)}
 			i++

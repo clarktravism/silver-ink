@@ -2,7 +2,6 @@ package engine
 
 import (
 	"silver-ink/render"
-	"github.com/jupiterrider/purego-sdl3/sdl"
 )
 
 var _stack []Processor
@@ -65,16 +64,16 @@ func stackRender() {
 
 	// redraw top of the stack
 	//if _dirty {
-		_dirty = false
-		if len(_stack) > 0 {
-			_stack[len(_stack)-1].Render(_buffer, true)
-		}
-		renderBuffer()
+	_dirty = false
+	if len(_stack) > 0 {
+		_stack[len(_stack)-1].Render(_buffer, true)
+	}
+	renderBuffer()
 	//}
 }
 
 func renderBuffer() {
 	render.ClearBackground(_renderer)
 	_buffer.Render()
-	sdl.RenderPresent(_renderer)
+	_renderer.Present()
 }
