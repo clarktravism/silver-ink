@@ -14,6 +14,14 @@ func (ctx *ScriptContext) GetArgMath(arg CmdArg) (int, bool) {
 			return 0, false
 		}
 		return Rand.Intn(v2-v1) + v1, true
+	case token.MathCoinFlip:
+		return Rand.Intn(2), true
+	case token.MathRoll:
+		v1, ok := ctx.GetArgInt(ctx.NextArg())
+		if !ok {
+			return 0, false
+		}
+		return Rand.Intn(v1) + 1, true
 	case token.MathAdd:
 		v1, ok := ctx.GetArgInt(ctx.NextArg())
 		if !ok {
@@ -50,7 +58,7 @@ func (ctx *ScriptContext) GetArgMath(arg CmdArg) (int, bool) {
 			return 0, false
 		}
 		v2, ok := ctx.GetArgInt(ctx.NextArg())
-		if !ok {
+		if !ok || v2 == 0 {
 			return 0, false
 		}
 		return v1 + v2, true
@@ -60,7 +68,7 @@ func (ctx *ScriptContext) GetArgMath(arg CmdArg) (int, bool) {
 			return 0, false
 		}
 		v2, ok := ctx.GetArgInt(ctx.NextArg())
-		if !ok {
+		if !ok || v2 == 0 {
 			return 0, false
 		}
 		return v1 % v2, true
@@ -73,6 +81,12 @@ func (ctx *ScriptContext) GetArgMath(arg CmdArg) (int, bool) {
 			return -v, true
 		}
 		return v, true
+	case token.MathNeg:
+		v, ok := ctx.GetArgInt(ctx.NextArg())
+		if !ok {
+			return 0, false
+		}
+		return -v, true
 	case token.MathDist:
 		p1, ok := ctx.GetArgPos(ctx.NextArg())
 		if !ok {

@@ -35,6 +35,7 @@ func main() {
 
 	engine.Setup("Silver-Ink", buffer_width, buffer_height, 10)
 	defer engine.Close()
+	engine.OpenAudio()
 	engine.SetQuitCallback(onQuit)
 	if err := StartWorld(worldpath); err != nil {
 		log.Println(err)

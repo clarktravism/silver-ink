@@ -10,7 +10,7 @@
         {
             "ID": 1,
             "Name": "Floor",
-            "Collision": "00000100",
+            "Collision": "00001100",
             "Char": 176,
             "Color": "DKGREEN"
         },
@@ -39,31 +39,34 @@
         {
             "ID": 5,
             "Name": "Boulder",
-            "Collision": "00000011",
+            "Collision": "00001011",
             "Char": 254,
             "Color": "GRAY",
-            "PushFlags": "PUSHABLE_ALL"
+            "PushFlags": "PUSHABLE_ALL",
+            "Script" : "PUSHABLE"
         },
         {
             "ID": 6,
             "Name": "SliderNS",
-            "Collision": "00000011",
+            "Collision": "00001011",
             "Char": 18,
             "Color": "PURPLE",
-            "PushFlags": "PUSHABLE_NS"
+            "PushFlags": "PUSHABLE_NS",
+            "Script" : "PUSHABLE"
         },
         {
             "ID": 7,
             "Name": "SliderEW",
-            "Collision": "00000011",
+            "Collision": "00001011",
             "Char": 29,
             "Color": "PURPLE",
-            "PushFlags": "PUSHABLE_EW"
+            "PushFlags": "PUSHABLE_EW",
+            "Script" : "PUSHABLE"
         },
         {
             "ID": 8,
             "Name": "Fake",
-            "Collision": "00000000",
+            "Collision": "00001100",
             "Char": 178,
             "Color": "Yellow"
         },
@@ -130,7 +133,7 @@
             "Name": "Water_N",
             "Char": 30,
             "Color": "BLUE/DKBLUE",
-            "Collision": "00000100",
+            "Collision": "00001100",
             "Script": "WATER_N"
         },
         {
@@ -138,7 +141,7 @@
             "Name": "Water_S",
             "Char": 31,
             "Color": "BLUE/DKBLUE",
-            "Collision": "00000100",
+            "Collision": "00001100",
             "Script": "WATER_S"
         },
         {
@@ -146,7 +149,7 @@
             "Name": "Water_E",
             "Char": 16,
             "Color": "BLUE/DKBLUE",
-            "Collision": "00000100",
+            "Collision": "00001100",
             "Script": "WATER_E"
         },
         {
@@ -154,7 +157,7 @@
             "Name": "Water_W",
             "Char": 17,
             "Color": "BLUE/DKBLUE",
-            "Collision": "00000100",
+            "Collision": "00001100",
             "Script": "WATER_W"
         },
         {

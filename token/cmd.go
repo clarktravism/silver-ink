@@ -37,6 +37,7 @@ const (
 	CmdLock
 	CmdLog
 	CmdName
+	CmdPlay
 	CmdPut
 	CmdRepeat
 	CmdRestart
@@ -44,6 +45,7 @@ const (
 	CmdScript
 	CmdSend
 	CmdSet
+	CmdStop
 	CmdView
 	CmdShoot
 	CmdTake
@@ -86,6 +88,7 @@ var cmdCodes = map[string]byte{
 	"LOCK":      CmdLock,
 	"LOG":       CmdLog,
 	"NAME":      CmdName,
+	"PLAY":      CmdPlay,
 	"PUT":       CmdPut,
 	"REPEAT":    CmdRepeat,
 	"RESTART":   CmdRestart,
@@ -93,6 +96,7 @@ var cmdCodes = map[string]byte{
 	"SCRIPT":    CmdScript,
 	"SEND":      CmdSend,
 	"SET":       CmdSet,
+	"STOP":      CmdStop,
 	"VIEW":      CmdView,
 	"SHOOT":     CmdShoot,
 	"TAKE":      CmdTake,
@@ -137,6 +141,7 @@ var cmdParams = map[byte][]int{
 	CmdLock:      {},
 	CmdLog:       {ParamText},
 	CmdName:      {ParamObjectName},
+	CmdPlay:      {ParamSoundPattern, ParamInteger | ParamOptional},
 	CmdPut:       {ParamDir | ParamPos, ParamInteger | ParamOptional, ParamElement | ParamPrefab},
 	CmdRepeat:    {ParamInteger, ParamCmd},
 	CmdRestart:   {},
@@ -144,11 +149,12 @@ var cmdParams = map[byte][]int{
 	CmdScript:    {ParamName},
 	CmdSend:      {ParamDir | ParamPos | ParamOptional, ParamScopedLabel | ParamLabel, ParamInteger | ParamOptional},
 	CmdSet:       {ParamCounter | ParamFlag, ParamInteger | ParamOptional},
+	CmdStop:      {ParamInteger | ParamOptional},
 	CmdView:      {ParamInteger},
 	CmdShoot:     {ParamDir, ParamInteger | ParamOptional, ParamPrefab},
 	CmdTake:      {ParamCounter, ParamInteger, ParamCmd | ParamOptional},
 	CmdTarget:    {ParamName},
-	CmdTextBox:   {ParamInteger, ParamText | ParamOptional },
+	CmdTextBox:   {ParamInteger, ParamText | ParamOptional},
 	CmdTile:      {ParamDir | ParamPos, ParamInteger | ParamOptional, ParamInteger},
 	CmdTry:       {ParamDir | ParamPos, ParamCmd | ParamOptional},
 	CmdTryShort:  {ParamDir | ParamPos},

@@ -177,6 +177,24 @@
             "Script": "PUSHER_W",
             "Collision": "00000011",
             "PushFlags": "CAN_PUSH"
+        },
+        {
+            "Name" : "SPINNING_GUN",
+            "Cycle" : 2,
+            "Char" : 24,
+            "Color" : "WHITE",
+            "Script" : "SPINNINGGUN",
+            "Collision" : "00000011",
+            "Counters": [
+                {
+                    "Name": "INTELLIGENCE",
+                    "Value": 5
+                },
+                {
+                    "Name": "FIRERATE",
+                    "Value": 2
+                }
+            ]
         }
     ]
 }

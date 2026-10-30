@@ -170,6 +170,8 @@ func (ctx *ScriptContext) runNext() {
 		ctx.cmdLog()
 	case token.CmdName:
 		ctx.cmdName()
+	case token.CmdPlay:
+		ctx.cmdPlay()
 	case token.CmdPut:
 		ctx.cmdPut()
 	case token.CmdRepeat:
@@ -184,6 +186,8 @@ func (ctx *ScriptContext) runNext() {
 		ctx.cmdSend()
 	case token.CmdSet:
 		ctx.cmdSet()
+	case token.CmdStop:
+		ctx.cmdStop()
 	case token.CmdView:
 		ctx.cmdView()
 	case token.CmdShoot:
@@ -277,6 +281,7 @@ func (ctx *ScriptContext) cmdAnd() {
 
 func (ctx *ScriptContext) cmdBecome() {
 	ctx.advance()
+	ctx.Stop = true
 
 	// optional color
 	color := ctx.Cell().Color
@@ -885,6 +890,36 @@ func (ctx *ScriptContext) cmdName() {
 	}
 }
 
+// <stream> <pattern>
+func (ctx *ScriptContext) cmdPlay() {
+	ctx.advance()
+
+	pattern := ctx.NextArg()
+	if pattern.Code != token.ArgSoundPattern {
+		ctx.Error(ErrBadParam)
+		return
+	}
+	notes := make([]engine.Note, pattern.Byte)
+	for i := range notes {
+		notes[i] = ctx.NextNote()
+	}
+
+	stream := 0
+	if v, ok := ctx.GetArgInt(ctx.NextArg()); ok {
+		if v <= 0 || v > len(engine.AudioBuffers) {
+			ctx.Error(ErrBadParam)
+			return
+		}
+		stream = v-1
+	}
+	for i := range notes {
+		if !engine.AudioBuffers[stream].Push(notes[i]) {
+			log.Printf("audio stream %v overflow", stream)
+			return
+		}
+	}
+}
+
 // <pos> [color] <element|prefab>
 func (ctx *ScriptContext) cmdPut() {
 	ctx.advance()
@@ -1196,6 +1231,22 @@ func (ctx *ScriptContext) cmdSet() {
 	} else {
 		ctx.Error(ErrBadParam)
 		return
+	}
+}
+
+func (ctx *ScriptContext) cmdStop() {
+	ctx.advance()
+	if v, ok := ctx.GetArgInt(ctx.NextArg()); ok {
+		if v >= 1 && v <= 4 {
+			engine.AudioBuffers[v-1].Stop()
+		} else {
+			ctx.Error(ErrBadParam)
+		}
+		return
+	}
+
+	for i := range engine.AudioBuffers {
+		engine.AudioBuffers[i].Stop()
 	}
 }
 

@@ -10,7 +10,7 @@ import (
 type CmdArg struct {
 	Code byte
 	Int  int16     // literal integer, color
-	Byte byte      // scope, dir, command, length
+	Byte byte      // scope, dir, command, length, note len, text len
 	Name data.Name // label, counter, element, prefab, board, object, group
 }
 
@@ -26,7 +26,7 @@ func (ctx *ScriptContext) NextArg() CmdArg {
 	case token.ArgInteger:
 		arg.Int = int16(binary.LittleEndian.Uint16(ctx.Script.Data[ctx.ArgPos : ctx.ArgPos+2]))
 		ctx.ArgPos += 2
-	case token.ArgScope, token.ArgCond, token.ArgMath, token.ArgDir, token.ArgPos, token.ArgObject, token.ArgFlag, token.ArgText:
+	case token.ArgScope, token.ArgCond, token.ArgMath, token.ArgDir, token.ArgPos, token.ArgObject, token.ArgFlag, token.ArgText, token.ArgSoundPattern:
 		arg.Byte = ctx.Script.Data[ctx.ArgPos]
 		ctx.ArgPos++
 	case token.ArgElement, token.ArgPrefab, token.ArgName, token.ArgScopeName, token.ArgObjectName, token.ArgLabel, token.ArgCounter:
@@ -185,4 +185,13 @@ func (ctx *ScriptContext) NextColorElement() (*data.Color, *data.Element, bool) 
 		return nil, nil, false
 	}
 	return color, element, true
+}
+
+func (ctx *ScriptContext) NextNote() engine.Note {
+	note := engine.Note{
+		Tone: ctx.Script.Data[ctx.ArgPos],
+		Duration: ctx.Script.Data[ctx.ArgPos+1],
+	}
+	ctx.ArgPos+=2
+	return note
 }

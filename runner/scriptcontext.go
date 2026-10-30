@@ -95,6 +95,28 @@ func (ctx *ScriptContext) GetInteger(scope byte, name data.Name) int {
 				return engine.Board.Objects[i].Position.Y
 			}
 			return -1
+		case PLAY1:
+			if engine.AudioBuffers[0].IsPlaying() {
+				return 1
+			}
+			return 0
+		case PLAY2:
+			if engine.AudioBuffers[0].IsPlaying() {
+				return 1
+			}
+			return 0
+		case PLAY3:
+			if engine.AudioBuffers[0].IsPlaying() {
+				return 1
+			}
+			return 0
+		case PLAY4:
+			if engine.AudioBuffers[0].IsPlaying() {
+				return 1
+			}
+			return 0
+		case TICK:
+			return int(engine.Board.Tick)
 		default:
 			if c := SaveFile.GetCounter(name); c != nil {
 				return c.Value
@@ -175,13 +197,13 @@ func (ctx *ScriptContext) GetGroup() data.Name {
 func (ctx *ScriptContext) RunEvent(event data.Name, skip int) bool {
 	if obj := ctx.GetObject(); obj != nil {
 		p := obj.ScriptPosition
-		r := ctx.RunEvent(event, skip)
+		r := ctx.EntityContext.RunEvent(event, skip)
 		if p != obj.ScriptPosition {
 			ctx.CurrentPos = p
 		}
 		return r
 	}
-	return ctx.RunEvent(event, skip)
+	return ctx.EntityContext.RunEvent(event, skip)
 }
 
 // ObjectContext

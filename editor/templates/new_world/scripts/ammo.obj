@@ -1,4 +1,6 @@
 #END
 :POKE
 #GIVE AMMO 5
+#STOP 4
+#PLAY %TCC#D 4
 #DIE

@@ -177,7 +177,8 @@ Which is equivalent to:
 "Collision" : "01000011"
 ```
 
-Generally, walls will have COLLISION_1, water will have COLLISION_2, and floor is COLLISION_3.
+Generally, walls will have COLLISION_1, water will have COLLISION_2, and empty or floor is COLLISION_3.
+Floor is also COLLISION_4, as well as Boulder and Sliders, to keep them confined.
 
 "00000011" is a good collision for most solid entities, that cannot traverse water or walls.
 "00000001" for projectiles that need to travel over water.
@@ -235,9 +236,81 @@ Objects counters are addressed with a "SELF:" or "THIS:" prefix. These are perso
 World counters span across boards, and do not require a prefix.
 Currently, there is no hard limit on the number of counters.
 
-### Built-in Values
+#### Built-In Values
+##### THISX, THISY
+The current x and y position of the object or element.
 
-  
+##### STEPX, STEPY
+The \#WALK x and y values for the object.
+
+##### ENTERX, ENTERY
+The board' enter x and y values.
+
+##### COLOR, FGCOLOR, BGCOLOR
+The number value of the object or element's color.
+
+##### CHAR
+The char value of the object or element.
+
+##### PLAYERX, PLAYERY
+The x and y of the player object.
+
+##### PLAY1, PLAY2, PLAY3, PLAY4
+Returns 1 (or true) if the sound buffer is currently playing.
+
+##### TICK
+The current board tick value (0-255). Increases by 1 every frame.
+
+#### Math Operators
+The following can be used as a substitute for any parameter that accepts a number.
+
+##### ADD \<number> \<number>
+Returns the sum of the two numbers.
+
+##### SUB \<number> \<number>
+Returns the difference between the two numbers.
+
+##### MUL \<number> \<number>
+Multiplies the two number.
+
+##### DIV \<number> \<number>
+Divides the two numbers.
+
+##### MOD \<number> \<number>
+Returns the remainder of the two numbers when divided.
+
+##### RANDOM \<number> \<number>
+Returns a random number starting from the first number to the second, exclusive.
+```
+RANDOM 2 5
+```
+Returns a number 2-4
+
+##### COINFLIP
+Returns 0 or 1 (or true or false).
+Shortcut for RANDOM 0 2
+
+##### ROLL \<number>
+Returns a number between 1 and the number given, inclusive.
+Shortcut for RANDOM 1 ADD \<number> 1
+```
+ROLL 6
+```
+Returns a number 1-6
+
+##### ABS \<number>
+Returns the absolute value of the number.
+
+##### NEG \<number>
+Returns the negative value for the number.
+Shortcut for MUL \<number> -1
+
+##### DIST \<pos|dir> \<pos|dir>
+Returns the manhattan distances between the two positions.
+
+##### DIFF \<number> \<number>
+Returns the absolute value of the difference of the two numbers.
+Shortcut of ABS SUB \<number> \<number>
 
 ### Events
 An event is when code is executed out of turn. In other words, when an event is received it is executed immediately until it reaches a command that halts the cycle (ex: \#END \#GO \#IDLE). A script can signal its own events, even inside another event. Labels are used to specify where the event starts. If the label isn't found it does nothing. Events honor \#ZAP and \#LOCK.
@@ -271,8 +344,6 @@ Keybind actions will be sent to the player as an event.
 
 ##### Summary of Changes from ZZT-OOP
 All scripts are stored in your world subfolder /scripts. Every object that requires code must reference a script file. On the startup, all scripts are evaluated and checked for (most) syntax errors. If any are found, they are written out and the game immediately closes.
-
-\#PLAY is not yet implemented
 
 \#BIND is no longer needed, as all objects that reference the same script share the code internally. \#ZAP and \#RESTORE still function as normal, however you cannot pre-zap labels.
 
@@ -489,6 +560,7 @@ Element: Yes
 End Cycle: Yes
 
 Long form of /i. Stops execution until next frame.
+
 ##### \#IF \<cond>  \[then] \<cmd>
 Element: Yes
 End Cycle: No
@@ -547,11 +619,6 @@ End Cycle: No
 
 Sets the object's name value.
 
-##### \#PUT <dir|pos>  \[color] \<element|prefab>
-Element: Yes
-End Cycle: No
-
-Places the element or prefab at the destination.
 ##### \#REPEAT \<value>  \<cmd>
 Element: Yes
 End Cycle: No
@@ -569,11 +636,42 @@ Element: Yes
 End Cycle: No
 
 Sets the script position to the start of the script.
+
 ##### \#RESTORE <label>
 Element: No
 End Cycle: No
 
 Undo a zapped label
+
+##### \#PLAY \<sound> \[buffer]
+Plays sounds using the same notation as ZZT.
+
+In addition:
+Octaves 0-7 are available (Default 4)
+'Noisy' Drums (Hi Snare-4, High Woodblock-5, Low Woodblock-8, Bass Drum-9) will generate thier random values on each hit.
+You can specify buffers 1-4 to play multiple notes at once. (Default 1)
+You can check if a buffer is playing with built-in values 'PLAY1' 'PLAY2' 'PLAY3' 'PLAY4'
+You can change the waveform within the \<sound>. (Default Square)
+\% Square Wave
+\~ Sine Wave
+\^ Triangle Wave
+\* Saw Wave
+
+Example: this will play the scale on two buffers at same time, with the second buffer switching from triangle to saw halfway.
+```
+#PLAY CDEFGAB+C 1
+#PLAY ^-CDEF*GAB+C 2
+```
+
+Each buffer can hold 256 notes (including waveform changes and drums).
+
+##### \#PUT <dir|pos>  \[color] \<element|prefab>
+Element: Yes
+End Cycle: No
+
+Places the element or prefab at the destination.
+
+Note: Unlike ZZT, this currently does not push a tile or object  if it is blocking it
 
 ##### \#SCRIPT <script>
 Element: No
@@ -628,6 +726,14 @@ Sets the counter to the value. If the counter doesn't exist, it will add it.
 BOARD: scope will set to the board counters.
 SELF: scope will set to the object counters.
 No scope will set to the world counters.
+
+##### \#STOP \[buffer]
+Element: Yes
+End Cycle: No
+
+Stops the audio on the buffer, or all buffers if not provided.
+
+Note: There may be small fade out period to prevent pops/clicks. The 'PLAY1-4' built-in values may still return true until next cycle.
 
 ##### \#VIEW \<id>
 Element: Yes

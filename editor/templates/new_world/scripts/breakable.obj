@@ -1,4 +1,6 @@
 #END
 :SHOT
 :BREAK
+#STOP 4
+#PLAY %T-C 4
 #DIE

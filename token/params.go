@@ -23,7 +23,7 @@ const (
 	ParamTarget
 	ParamCond
 	ParamCmd
-	ParamSound
+	ParamSoundPattern
 	ParamObject
 	ParamObjectName
 	ParamName
@@ -125,6 +125,12 @@ func (bcs *ByteCodeScanner) putParam(b []byte, buf []byte, param int) (r int, w 
 			buf[1] = code
 			return r, 2, nil
 		}
+	}
+
+	// sound pattern
+	if param&ParamSoundPattern == ParamSoundPattern {
+		w, err = bcs.putSoundPatternParam(str, buf)
+		return r, w, err
 	}
 
 	// scope:label

@@ -11,21 +11,27 @@ const (
 	MathDiv
 	MathMod
 	MathRandom
+	MathCoinFlip
+	MathRoll
 	MathAbs
+	MathNeg
 	MathDist
 	MathDiff
 )
 
 var mathCodes = map[string]byte{
-	"ADD":    MathAdd,
-	"SUB":    MathSub,
-	"MUL":    MathMul,
-	"DIV":    MathDiv,
-	"MOD":    MathMod,
-	"RANDOM": MathRandom,
-	"ABS":    MathAbs,
-	"DIST":   MathDist,
-	"DIFF":   MathDiff,
+	"ADD":      MathAdd,
+	"SUB":      MathSub,
+	"MUL":      MathMul,
+	"DIV":      MathDiv,
+	"MOD":      MathMod,
+	"RANDOM":   MathRandom,
+	"COINFLIP": MathCoinFlip,
+	"ROLL":     MathRoll,
+	"ABS":      MathAbs,
+	"NEG":      MathNeg,
+	"DIST":     MathDist,
+	"DIFF":     MathDiff,
 }
 
 var mathParams = map[byte][]int{
@@ -34,8 +40,10 @@ var mathParams = map[byte][]int{
 	MathDiv:    {ParamInteger, ParamInteger},
 	MathMod:    {ParamInteger, ParamInteger},
 	MathRandom: {ParamInteger, ParamInteger},
+	MathRoll:   {ParamInteger},
 	MathAbs:    {ParamInteger},
-	MathDist:   {ParamPos, ParamPos},
+	MathNeg:    {ParamInteger},
+	MathDist:   {ParamPos | ParamDir, ParamPos | ParamDir},
 	MathDiff:   {ParamInteger, ParamInteger},
 }
 

@@ -32,6 +32,11 @@ var PLAYERX = data.NewName("PLAYERX")
 var PLAYERY = data.NewName("PLAYERY")
 var BOARDID = data.NewName("BOARDID")
 
+var PLAY1 = data.NewName("PLAY1")
+var PLAY2 = data.NewName("PLAY2")
+var PLAY3 = data.NewName("PLAY3")
+var PLAY4 = data.NewName("PLAY4")
+
 // built-in events
 var START_GAME = data.NewName("START_GAME")
 var SAVE_GAME = data.NewName("SAVE_GAME")

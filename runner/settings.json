@@ -1,4 +1,4 @@
 {
-    "DefaultWorld" : "../build/win/worlds/test_world",
+    "DefaultWorld" : "../editor/worlds/test_world",
     "WorldsFolder" : "../editor/worlds"
 }

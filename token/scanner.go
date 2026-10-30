@@ -269,6 +269,8 @@ func (bcs *ByteCodeScanner) putShortCmd(b []byte, buf []byte) (r int, w int, err
 	return r, w, nil
 }
 
+var ErrCommandTooLong = errors.New("command too long")
+
 func (bcs *ByteCodeScanner) putCmd(b []byte, buf []byte) (r int, w int, err error) {
 	// get cmd byte
 	r, word := bcs.scanWord(b)
@@ -288,6 +290,10 @@ func (bcs *ByteCodeScanner) putCmd(b []byte, buf []byte) (r int, w int, err erro
 		}
 		r += rN
 		w += wN
+	}
+
+	if w > 255 {
+		return 0, 0, ErrCommandTooLong
 	}
 
 	buf[1] = byte(w) // length of cmd + params

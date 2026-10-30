@@ -19,4 +19,5 @@ const (
 	ArgName                       // name(2)
 	ArgFlag                       // byte(1)
 	ArgText                       // len(1) text..
+	ArgSoundPattern               // len(1) notes(2)..
 )
